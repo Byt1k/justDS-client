@@ -1,0 +1,43 @@
+@import "common.module";
+
+.posts {
+  background-color: #f5f5f5;
+  padding-bottom: 170px;
+
+  .container {
+    margin-top: 64px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  &__filter {
+    display: flex;
+    column-gap: 25px;
+
+    button {
+      padding: 13px 50px;
+      color: #414141;
+      background-color: #fff;
+      box-shadow: 0px 3px 19px rgba(0, 0, 0, 0.08);
+      border-radius: 48px;
+      font-size: 18px;
+      transition: all .3s ease;
+
+      &.active {
+        background: #6A9BFB;
+        color: #fff;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+}

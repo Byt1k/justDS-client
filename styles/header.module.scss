@@ -1,12 +1,11 @@
 @import 'common.module';
 
 .header {
+  padding-top: 45px;
 
   .container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
   }
 
   &__btn {
@@ -21,12 +20,11 @@
     border-radius: 12px;
     width: 240px;
     height: 50px;
+    margin-left: auto;
   }
 
   &__burger {
-    position: absolute;
-    right: 27px;
-    z-index: 1;
+    margin-left: 96px;
     cursor: pointer;
   }
 
@@ -35,11 +33,17 @@
       background: rgba(255, 255, 255, 0.14);
       border: 2px solid #fff;
     }
+
+    .header__burger {
+      position: fixed;
+      right: 27px;
+      z-index: 2;
+    }
   }
 }
 
 .overflow {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

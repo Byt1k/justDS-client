@@ -5,17 +5,17 @@ import {buildStyles, CircularProgressbar} from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import {useEffect, useState} from "react"
 import Footer from '@/components/Footer'
-
-
+import {Link as ScrollTo, animateScroll as scroll} from "react-scroll";
+import Cases from "@/components/Cases";
+import Post from "@/components/Post";
+import Blog from "@/components/Blog";
 
 const Home = () => {
-
     const [rotationProgressbar, setRotationProgressbar] = useState(-0.5)
     const [valueProgressbar, setValueProgressbar] = useState(0)
     const [transitionProgressbar, setTransitionProgressbar] = useState(0.5)
 
     const [activeSlideIndex, setActiveSlideIndex] = useState(0)
-
 
     useEffect(() => {
         let value = valueProgressbar
@@ -59,7 +59,7 @@ const Home = () => {
             backgroundText: 'Технический аудит'
         },
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54129E0 0%, #C42AFB 70.99%)',
+            backgroundColor: 'linear-gradient(110.56deg, #54E29E0 0%, #C42AFB 70.99%)',
             backgroundText: 'аудит'
         }
     ]
@@ -82,6 +82,35 @@ const Home = () => {
         }
     }
 
+    //todo: posts should be from api
+    const posts = [
+        {
+            id: 1,
+            img: '/post1.png',
+            title: 'Создаем визуал для проектов любого объема и сложности',
+            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
+            tags: ['consult'],
+            views: 10
+        },
+        {
+            id: 2,
+            img: '/post2.png',
+            title: 'Создаем визуал для проектов любого объема и сложности',
+            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
+            tags: ['consult', 'design'],
+            views: 10
+        },
+        {
+            id: 3,
+            img: '/post3.png',
+            title: 'Создаем визуал для проектов любого объема и сложности',
+            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
+            tags: ['design'],
+            views: 10
+        }
+    ]
+
+
     return (
         <>
             <main className={styles.main} style={{background: slides[activeSlideIndex].backgroundColor}}>
@@ -91,10 +120,11 @@ const Home = () => {
                         <p>Проекты</p>
                     </Link>
                 </div>
-                <a href="#" className={styles.scroll}>
+                <ScrollTo to="main-services" smooth={true} duration={800} className={styles.scroll}>
                     <img src="/scroll-down.svg" alt="scroll-down"/>
-                </a>
-                <p className={styles.backgroundTitle}>Дизайн и разработка</p>
+                </ScrollTo>
+
+                <p className={styles.backgroundTitle}>{slides[activeSlideIndex].backgroundText}</p>
                 <div className={styles.container}>
                     <div className={styles.slider}>
                         <CircularProgressbar value={valueProgressbar} className={styles.slider__progressbar}
@@ -142,7 +172,7 @@ const Home = () => {
                     </div>
                 </div>
             </main>
-            <section className={styles.services} style={{background: '#f5f5f5 url(/services0.png) no-repeat center top / cover'}}>
+            <section id="main-services" className={styles.services} style={{background: '#f5f5f5 url(/services0.png) no-repeat center top / cover'}}>
                 <div className={styles.container}>
                     <div className={styles.services__item}>
                         <p>web-разработка & дизайн</p>
@@ -167,147 +197,8 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <section className={styles.portfolio}>
-                <div className={styles.container}>
-                    <h2>Наши <strong>кейсы</strong></h2>
-                    <div className={styles.portfolio__grid}>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p1.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p2.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p3.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p4.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item}>
-                            <h3>Единая платформа</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur. Quis dolor libero semper tempus cursus dapibus morbi amet feugiat. Elementum nulla adipiscing.</p>
-                            <Link href='/#'>
-                                <img src="/portfolio-arrow.svg" alt="arrow"/>
-                            </Link>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p6.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item}>
-                            <h3>Единая платформа</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur. Quis dolor libero semper tempus cursus dapibus morbi amet feugiat. Elementum nulla adipiscing.</p>
-                            <Link href='/#'>
-                                <img src="/portfolio-arrow.svg" alt="arrow"/>
-                            </Link>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p8.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p9.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item}>
-                            <h3>Единая платформа</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur.</p>
-                            <Link href='/#'>
-                                <img src="/portfolio-arrow.svg" alt="arrow"/>
-                            </Link>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p11.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item} style={{backgroundImage: 'url(/p12.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </div>
-                        <div className={styles.portfolio__item}>
-                            <h3>Единая платформа</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur. Quis dolor libero semper tempus cursus dapibus morbi amet feugiat. Elementum nulla adipiscing.</p>
-                            <Link href='/#'>
-                                <img src="/portfolio-arrow.svg" alt="arrow"/>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className={styles.blog}>
-                <div className={styles.container}>
-                    <div className={styles.title}>
-                        <h2>Блог</h2>
-                        <Link href='/blog'>
-                            Все записи
-                            <img src="/title-arrow.svg" alt="arrow"/>
-                        </Link>
-                    </div>
-                    <div className={styles.wrapper}>
-                        <div className={styles.blog__item}>
-                            <div className={styles.blog__item__img}>
-                                <img src="/post1.png" alt="post1"/>
-                                <div/>
-                                <div/>
-                            </div>
-                            <div className={styles.blog__item__info}>
-                                <div className={styles.hashtags}>
-                                    <span>#it_консалтинг</span>
-                                    <span>#web_дизайн</span>
-                                </div>
-                                <div className={styles.views}>
-                                    <img src="/eye.svg" alt="eye"/>
-                                    20
-                                </div>
-                            </div>
-                            <p className={styles.blog__item__title}>Создаем визуал для проектов любого объема и сложности </p>
-                            <p className={styles.blog__item__text}>История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.</p>
-                        </div>
-                        <div className={styles.blog__item}>
-                            <div className={styles.blog__item__img}>
-                                <img src="/post2.png" alt="post2"/>
-                                <div/>
-                                <div/>
-                            </div>
-                            <div className={styles.blog__item__info}>
-                                <div className={styles.hashtags}>
-                                    <span>#it_консалтинг</span>
-                                    <span>#web_дизайн</span>
-                                </div>
-                                <div className={styles.views}>
-                                    <img src="/eye.svg" alt="eye"/>
-                                    20
-                                </div>
-                            </div>
-                            <p className={styles.blog__item__title}>Создаем визуал для проектов любого объема и сложности </p>
-                            <p className={styles.blog__item__text}>История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.</p>
-                        </div>
-                        <div className={styles.blog__item}>
-                            <div className={styles.blog__item__img}>
-                                <img src="/post3.png" alt="post3"/>
-                                <div/>
-                                <div/>
-                            </div>
-                            <div className={styles.blog__item__info}>
-                                <div className={styles.hashtags}>
-                                    <span>#it_консалтинг</span>
-                                    <span>#web_дизайн</span>
-                                </div>
-                                <div className={styles.views}>
-                                    <img src="/eye.svg" alt="eye"/>
-                                    20
-                                </div>
-                            </div>
-                            <p className={styles.blog__item__title}>Создаем визуал для проектов любого объема и сложности </p>
-                            <p className={styles.blog__item__text}>История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Cases className={styles.portfolio}/>
+            <Blog posts={posts} className={styles.blog} title="Блог"/>
             <Footer />
         </>
     )

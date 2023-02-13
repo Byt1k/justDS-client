@@ -1,0 +1,21 @@
+.breadcrumbs {
+  margin: 25px 0;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+
+  a {
+    color: #D0D0D0;
+
+    &::after {
+      content: '>';
+      margin: 0 12px;
+    }
+  }
+
+  p {
+    font-weight: 600;
+    color: #6A9BFB;
+  }
+}
