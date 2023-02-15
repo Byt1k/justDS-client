@@ -19,3 +19,9 @@
     color: #6A9BFB;
   }
 }
+
+@media screen and (max-width: 991px) {
+  .breadcrumbs {
+    display: none;
+  }
+}
