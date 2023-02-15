@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} id="footer">
             <div className={styles.action}>
                 <div className={styles.container}>
                     <div>
@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
             <div className={styles.contacts}>
                 <div className={styles.container}>
-                    <Link href='/'>
+                    <Link href='/' className={styles.contacts__logo}>
                         <img src="/logo-white.svg" alt="Just DS"/>
                     </Link>
                     <div className={styles.contacts__item}>

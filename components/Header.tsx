@@ -2,6 +2,7 @@ import styles from '@/styles/header.module.scss'
 import Link from "next/link"
 import {useRouter} from "next/router";
 import {useState} from "react";
+import {Link as ScrollTo} from "react-scroll/modules";
 
 const Header = () => {
 
@@ -13,7 +14,7 @@ const Header = () => {
         return (
             <header className={`${styles.header} ${isHomePage && styles.home}`}>
                 <div className={styles.container}>
-                    <Link href='/'>
+                    <Link href='/' className={styles.header__logo}>
                         <img src={isHomePage ? '/logo-white.svg' : '/logo.svg'} alt="JUST DS"/>
                     </Link>
                     <button className={styles.header__btn}>Начать проект</button>
@@ -43,7 +44,8 @@ const Header = () => {
                             <p>мы пишем</p>
                         </div>
                         <div className={styles.menu__basicItem}>
-                            <Link href='/contacts'>Контакты</Link>
+                            <ScrollTo to="footer" smooth={true} duration={800}
+                                      onClick={() => setMenuIsActive(false)}>Контакты</ScrollTo>
                             <p>как нас найти</p>
                         </div>
                         <Link href='/services' className={styles.menu__additionalItem}>Разработка сайтов</Link>

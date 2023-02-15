@@ -24,7 +24,7 @@ const Blog: FC<BlogProps> = ({posts, className, title}) => {
                 </div>
                 <div className={styles.blog__wrapper}>
                     {posts.map(post => (
-                        <Post post={post}/>
+                        <Post key={post.id} post={post}/>
                     ))}
                 </div>
             </div>

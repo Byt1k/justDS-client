@@ -7,7 +7,6 @@ import {useEffect, useState} from "react"
 import Footer from '@/components/Footer'
 import {Link as ScrollTo, animateScroll as scroll} from "react-scroll";
 import Cases from "@/components/Cases";
-import Post from "@/components/Post";
 import Blog from "@/components/Blog";
 
 const Home = () => {
@@ -97,7 +96,7 @@ const Home = () => {
             img: '/post2.png',
             title: 'Создаем визуал для проектов любого объема и сложности',
             text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult', 'design'],
+            tags: ['consult'],
             views: 10
         },
         {
@@ -109,7 +108,6 @@ const Home = () => {
             views: 10
         }
     ]
-
 
     return (
         <>
@@ -153,6 +151,9 @@ const Home = () => {
                                  onClick={() => setRotationProgressbar(0.3)}
                             />
                         </div>
+                        <div className={styles.slider__linearProgressbar}>
+                            <div style={{width: `${valueProgressbar * 5}%`}}/>
+                        </div>
                         <div className={styles.slider__content}>
                             <p className={styles.type}>LANDING</p>
                             <p className={styles.title}>Сайт к юбилею компании</p>
@@ -172,7 +173,8 @@ const Home = () => {
                     </div>
                 </div>
             </main>
-            <section id="main-services" className={styles.services} style={{background: '#f5f5f5 url(/services0.png) no-repeat center top / cover'}}>
+            <section id="main-services" className={styles.services}
+                     style={{background: '#f5f5f5 url(/services0.png) no-repeat center top / cover'}}>
                 <div className={styles.container}>
                     <div className={styles.services__item}>
                         <p>web-разработка & дизайн</p>

@@ -13,13 +13,39 @@
       align-items: center;
       gap: 12px;
       font-weight: 500;
-      font-size: 24.0212px;
+      font-size: 24px;
       color: #6A9BFB;
     }
   }
 
   &__wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
+  }
+}
+
+@media screen and (max-width: 1599px) {
+  .blog {
+    &__title {
+      a {
+        font-size: 21px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .blog {
+
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    &__title {
+      a {
+        font-size: 14px;
+      }
+    }
   }
 }
