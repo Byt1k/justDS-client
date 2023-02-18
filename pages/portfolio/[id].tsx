@@ -11,7 +11,7 @@ import {ProjectType} from "@/types";
 import dateToString from "@/utils/dateToString";
 
 type ProjectProps = {
-    project?: ProjectType
+    project: ProjectType
 }
 
 const Project: NextPage<ProjectProps> = ({project}) => {
@@ -24,15 +24,15 @@ const Project: NextPage<ProjectProps> = ({project}) => {
                     <Breadcrumbs>
                         <Link href='/'>Главная</Link>
                         <Link href='/portfolio'>Портфолио</Link>
-                        <p>{project?.attributes.title}</p>
+                        <p>{project.attributes.title}</p>
                     </Breadcrumbs>
                     <div className={styles.project__info}>
-                        <p>Опубликовано: <strong>{dateToString(project?.attributes.publishedAt)}</strong></p>
-                        <Share />
+                        <p>Опубликовано: <strong>{dateToString(project.attributes.publishedAt)}</strong></p>
+                        <Share/>
                     </div>
-                    <p className={styles.project__title}>{project?.attributes.title}</p>
-                    <img src={serverUrl + project?.attributes.presentation.data.attributes.url}
-                         alt={project?.attributes.title} className={styles.project__img}/>
+                    <p className={styles.project__title}>{project.attributes.title}</p>
+                    <img src={serverUrl + project.attributes.presentation.data.attributes.url}
+                         alt={project.attributes.title} className={styles.project__img}/>
                 </div>
             </section>
             <Footer/>
@@ -40,22 +40,32 @@ const Project: NextPage<ProjectProps> = ({project}) => {
     )
 }
 
-export const getStaticPaths: GetStaticPaths = async  () => {
-    const {data: projects} = await Api().projects.getAllProjects()
+export const getStaticPaths: GetStaticPaths = async () => {
+    try {
+        const {data: projects} = await Api().projects.getAllProjects()
 
-    const paths = projects?.map(project => ({
-        params: {id: project.id.toString()}
-    }))
+        const paths = projects?.map(project => ({
+            params: {id: project.id.toString()}
+        }))
 
-    return {paths, fallback: false}
+        return {paths, fallback: false}
+    } catch (e) {
+        console.log(e)
+        return {paths: [], fallback: false}
+    }
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-    const {id} = params as IParams
-    const {data: project} = await Api().projects.getProject(id)
+    try {
+        const {id} = params as IParams
+        const {data: project} = await Api().projects.getProject(id)
 
-    return {
-        props: {project}
+        return {
+            props: {project}
+        }
+    } catch (e) {
+        console.log(e)
+        return {props: { project: {} }}
     }
 }
 

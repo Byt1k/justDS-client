@@ -38,8 +38,15 @@ const Portfolio: NextPage<PortfolioProps> = ({projects, meta}) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const {data, meta} = await Api().projects.getAllProjects()
-    return {props: {projects: data, meta}}
+    try {
+        const {data, meta} = await Api().projects.getAllProjects()
+        return {props: {projects: data, meta}}
+    }
+    catch (e) {
+        console.log(e)
+        return {props: {projects: {}, meta: {}}}
+    }
+
 }
 
 export default Portfolio;
