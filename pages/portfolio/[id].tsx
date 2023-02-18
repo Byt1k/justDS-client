@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         }
     } catch (e) {
         console.log(e)
-        return {props: { project: {} }}
+        return {props: { project: [] }}
     }
 }
 
