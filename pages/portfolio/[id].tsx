@@ -4,15 +4,17 @@ import styles from "@/styles/project.module.scss"
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Share from "@/components/Share";
+import {Api, serverUrl} from "@/api";
+import {GetStaticPaths, GetStaticProps, NextPage} from "next";
+import {ParsedUrlQuery} from "querystring";
+import {ProjectType} from "@/types";
+import dateToString from "@/utils/dateToString";
 
-const Project = () => {
-    //todo: project should be from api
-    const project = {
-        id: 1,
-        date: '22.06.2022',
-        title: 'Сайт для сетевого автосервиса «STACHKA»',
-        src: '/project1.png'
-    }
+type ProjectProps = {
+    project: ProjectType
+}
+
+const Project: NextPage<ProjectProps> = ({project}) => {
 
     return (
         <>
@@ -22,19 +24,43 @@ const Project = () => {
                     <Breadcrumbs>
                         <Link href='/'>Главная</Link>
                         <Link href='/portfolio'>Портфолио</Link>
-                        <p>{project.title}</p>
+                        <p>{project.attributes.title}</p>
                     </Breadcrumbs>
                     <div className={styles.project__info}>
-                        <p>Опубликовано: <strong>{project.date}</strong></p>
+                        <p>Опубликовано: <strong>{dateToString(project.attributes.publishedAt)}</strong></p>
                         <Share />
                     </div>
-                    <p className={styles.project__title}>{project.title}</p>
-                    <img src={project.src} alt={project.title} className={styles.project__img}/>
+                    <p className={styles.project__title}>{project.attributes.title}</p>
+                    <img src={serverUrl + project.attributes.presentation.data.attributes.url}
+                         alt={project.attributes.title} className={styles.project__img}/>
                 </div>
             </section>
             <Footer/>
         </>
     )
+}
+
+export const getStaticPaths: GetStaticPaths = async  () => {
+    const {data: projects} = await Api().projects.getAllProjects()
+
+    const paths = projects?.map(project => ({
+        params: {id: project.id.toString()}
+    }))
+
+    return {paths, fallback: false}
+}
+
+export const getStaticProps: GetStaticProps = async ({params}) => {
+    const {id} = params as IParams
+    const {data: project} = await Api().projects.getProject(id)
+
+    return {
+        props: {project}
+    }
+}
+
+interface IParams extends ParsedUrlQuery {
+    id: string
 }
 
 export default Project;

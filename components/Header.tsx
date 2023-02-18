@@ -17,7 +17,8 @@ const Header = () => {
                     <Link href='/' className={styles.header__logo}>
                         <img src={isHomePage ? '/logo-white.svg' : '/logo.svg'} alt="JUST DS"/>
                     </Link>
-                    <button className={styles.header__btn}>Начать проект</button>
+                    <ScrollTo to="footer" smooth={true} duration={800} className={styles.header__btn}>
+                        Начать проект</ScrollTo>
                     <div className={styles.header__burger}>
                         <img src={isHomePage ? '/burger-white.svg' : '/burger.svg'}
                              onClick={() => setMenuIsActive(true)}

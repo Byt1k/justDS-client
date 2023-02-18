@@ -2,10 +2,19 @@ import Header from "@/components/Header";
 import styles from "@/styles/portfolio.module.scss"
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import {Api, serverUrl} from "@/api";
+import {GetStaticPaths, GetStaticProps, NextPage} from "next";
+import {PaginationType, ProjectType} from "@/types";
 
-const Portfolio = () => {
-    //todo: id should be from api
-    const id = 1;
+type PortfolioProps = {
+    projects: ProjectType[],
+    meta: {
+        pagination: PaginationType
+    }
+}
+
+const Portfolio: NextPage<PortfolioProps> = ({projects, meta}) => {
+
     return (
         <>
             <div className={styles.portfolio}>
@@ -13,84 +22,24 @@ const Portfolio = () => {
                 <div className={styles.container}>
                     <h2>Наши <strong>кейсы</strong></h2>
                     <div className={styles.portfolio__grid}>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p1.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p2.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p3.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p4.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p6-1.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p9.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p8.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p4.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p10.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p1.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p2.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p3.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p4.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p6-1.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p9.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p8.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p4.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
-                        <Link href={`/portfolio/${id}`} className={styles.portfolio__item} style={{backgroundImage: 'url(/p10.png)'}}>
-                            <p>Кейс</p>
-                            <h3>Сайт для сетевого автосервиса «STACHKA»</h3>
-                        </Link>
+                        {projects?.map(project => (
+                            <Link key={project.id} href={`/portfolio/${project.id}`} className={styles.portfolio__item}
+                                  style={{backgroundImage: `url(${serverUrl + project.attributes.preview.data.attributes.url})`}}>
+                                <p>{project.attributes.type}</p>
+                                <h3>{project.attributes.title}</h3>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const {data, meta} = await Api().projects.getAllProjects()
+    return {props: {projects: data, meta}}
 }
 
 export default Portfolio;

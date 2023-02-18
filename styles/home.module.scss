@@ -5,6 +5,7 @@
   position: relative;
   transition: all .3s ease;
   overflow: hidden;
+  transition: all .3s ease;
 
   .menu {
     position: fixed;
@@ -13,10 +14,11 @@
     right: 0;
     width: 92px;
     height: 100vh;
-    background: rgba(108, 158, 255, 0.6);
+    //background: rgba(108, 158, 255, 0.6);
     box-shadow: 0px 4px 43px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(4.5px);
     border-left: 2px solid #fff;
+    transition: all .3s ease;
 
     .link {
       display: flex;
@@ -176,6 +178,7 @@
         line-height: 48px;
         letter-spacing: 0.005em;
         text-transform: uppercase;
+        padding: 0 20px;
       }
 
       .link {
@@ -196,7 +199,7 @@
 }
 
 
-// Стилизация и анимация картинок слайдера Ригла
+// Стилизация и анимация картинок слайдера
 
 .rigla {
   &__main {
@@ -221,54 +224,262 @@
     };
     animation: pill1 2s infinite alternate ease-in-out;
   }
+
+  .pill2 {
+    position: absolute;
+    top: 360px;
+    left: 190px;
+    @keyframes pill2 {
+      to {
+        top: 350px;
+      }
+    };
+    animation: pill2 2s infinite alternate ease-in-out;
+  }
+
+  .pill3 {
+    position: absolute;
+    bottom: 210px;
+    left: 100px;
+    @keyframes pill3 {
+      to {
+        bottom: 225px;
+      }
+    };
+    animation: pill3 1.5s infinite alternate ease-in-out 0.5s;
+  }
+
+  .pill4 {
+    position: absolute;
+    top: 330px;
+    right: 70px;
+    @keyframes pill4 {
+      to {
+        top: 345px;
+      }
+    };
+    animation: pill4 1.5s infinite alternate ease-in-out;
+  }
+
+  .pill5 {
+    position: absolute;
+    bottom: 230px;
+    right: 140px;
+    @keyframes pill5 {
+      to {
+        bottom: 215px;
+      }
+    };
+    animation: pill5 1s infinite alternate linear 0.5s;
+  }
 }
 
-.pill2 {
-  position: absolute;
-  top: 360px;
-  left: 190px;
-  @keyframes pill2 {
-    to {
-      top: 350px;
+.mts {
+  &__main {
+    display: block;
+    margin: 80px auto 0 auto;
+    max-width: 84%;
+  }
+
+  img:not(.mts__main) {
+    position: absolute;
+    transform: scale(0.84);
+  }
+
+  &__ball1 {
+    left: 160px;
+    bottom: 85px;
+    @keyframes ball2-1 {
+      to {
+        bottom: 70px;
+      }
     }
-  };
-  animation: pill2 2s infinite alternate ease-in-out;
+    animation: ball2-1 2s infinite alternate linear;
+  }
+
+  &__ball2 {
+    right: 120px;
+    bottom: 185px;
+    @keyframes ball2-2 {
+      to {
+        bottom: 165px;
+      }
+    }
+    animation: ball2-2 1.5s infinite alternate linear 1s;
+  }
+
+  &__ball3 {
+    right: 180px;
+    top: 440px;
+    @keyframes ball2-3 {
+      to {
+        top: 420px;
+      }
+    }
+    animation: ball2-3 2s infinite alternate linear;
+  }
 }
 
-.pill3 {
-  position: absolute;
-  bottom: 210px;
-  left: 100px;
-  @keyframes pill3 {
-    to {
-      bottom: 225px;
+.mir {
+  &__main {
+    width: 100%;
+    display: block;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  img:not(.mir__main) {
+    position: absolute;
+    transform: scale(0.9);
+  }
+
+  &__item1 {
+    top: 330px;
+    left: 0;
+    z-index: 1;
+    @keyframes bubl1 {
+      to {
+       top: 350px;
+      }
     }
-  };
-  animation: pill3 1.5s infinite alternate ease-in-out 0.5s;
+    animation: bubl1 2s infinite alternate linear;
+  }
+
+  &__item2 {
+    top: 180px;
+    left: -150px;
+    z-index: 0;
+    @keyframes bubl2 {
+      to {
+       top: 200px;
+      }
+    }
+    animation: bubl2 1.5s infinite alternate linear;
+  }
+
+  &__item3 {
+    top: 160px;
+    right: -110px;
+    z-index: 0;
+    @keyframes bubl3 {
+      to {
+       top: 180px;
+      }
+    }
+    animation: bubl3 1.5s infinite alternate linear;
+  }
 }
 
-.pill4 {
-  position: absolute;
-  top: 330px;
-  right: 70px;
-  @keyframes pill4 {
-    to {
-      top: 345px;
+.hd {
+  position: relative;
+
+  &__main {
+    max-width: 100%;
+    transform: scale(0.88);
+    margin: 35px auto 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  img:not(.hd__main) {
+    position: absolute;
+    transform: scale(0.88);
+  }
+
+  &__item1 {
+    top: 110px;
+    left: 125px;
+    @keyframes item1 {
+      to {
+        top: 95px;
+      }
     }
-  };
-  animation: pill4 1.5s infinite alternate ease-in-out;
+    animation: item1 2s infinite alternate linear;
+  }
+
+  &__item2 {
+    top: 100px;
+    right: 120px;
+    z-index: 1;
+    @keyframes item2 {
+      to {
+        top: 120px;
+      }
+    }
+    animation: item2 2s infinite alternate linear;
+  }
+
+  &__item3 {
+    top: 340px;
+    right: 265px;
+    z-index: 1;
+    @keyframes item3 {
+      to {
+        top: 360px;
+      }
+    }
+    animation: item3 1.5s infinite alternate linear 1s;
+  }
 }
 
-.pill5 {
-  position: absolute;
-  bottom: 230px;
-  right: 140px;
-  @keyframes pill5 {
-    to {
-      bottom: 215px;
+.fit {
+  position: relative;
+
+  &__main {
+    max-width: 100%;
+    display: block;
+    margin: 35px auto 0 auto;
+  }
+
+  img:not(.fit__main) {
+    position: absolute;
+    transform: scale(.9);
+  }
+
+  &__ball1 {
+    top: 250px;
+    left: 60px;
+    @keyframes ball5-1 {
+      to {
+        top: 230px;
+      }
     }
-  };
-  animation: pill5 1s infinite alternate linear 0.5s;
+    animation: ball5-1 1.5s infinite alternate linear;
+  }
+
+  &__ball2 {
+    top: 290px;
+    left: 90px;
+    @keyframes ball5-2 {
+      to {
+        top: 310px;
+      }
+    }
+    animation: ball5-2 2s infinite alternate linear;
+  }
+
+  &__ball3 {
+    top: 180px;
+    right: 60px;
+    @keyframes ball5-3 {
+      to {
+        top: 200px;
+      }
+    }
+    animation: ball5-3 1.5s infinite alternate linear;
+  }
+
+  &__ball4 {
+    top: 270px;
+    right: 70px;
+    @keyframes ball5-4 {
+      to {
+        top: 250px;
+      }
+    }
+    animation: ball5-4 2s infinite alternate linear 1s;
+  }
 }
 
 
@@ -469,6 +680,129 @@
     }
   }
 
+  .mts {
+    img:not(.mts__main) {
+      transform: scale(0.8);
+    }
+
+    &__ball1 {
+      left: 130px;
+      bottom: 35px;
+      @keyframes ball2-1 {
+        to {
+          bottom: 20px;
+        }
+      }
+    }
+
+    &__ball2 {
+      bottom: 135px;
+      @keyframes ball2-2 {
+        to {
+          bottom: 115px;
+        }
+      }
+    }
+
+    &__ball3 {
+      right: 160px;
+      top: 370px;
+      @keyframes ball2-3 {
+        to {
+          top: 350px;
+        }
+      }
+    }
+  }
+
+  .mir {
+    img:not(.mir__main) {
+      transform: scale(0.7);
+    }
+
+    &__item1 {
+      top: 220px;
+      left: -70px;
+      @keyframes bubl1 {
+        to {
+          top: 240px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 80px;
+      left: -180px;
+      @keyframes bubl2 {
+        to {
+          top: 100px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 100px;
+      right: -150px;
+      @keyframes bubl3 {
+        to {
+          top: 80px;
+        }
+      }
+    }
+  }
+
+  .hd {
+    &__main {
+      transform: scale(0.8);
+      margin-top: -10px;
+    }
+
+    img:not(.hd__main) {
+      transform: scale(0.8);
+    }
+
+    &__item1 {
+      top: 90px;
+      left: 60px;
+      @keyframes item1 {
+        to {
+          top: 75px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 70px;
+      right: 60px;
+      @keyframes item2 {
+        to {
+          top: 90px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 270px;
+      right: 185px;
+      @keyframes item3 {
+        to {
+          top: 290px;
+        }
+      }
+    }
+  }
+
+  .fit {
+    &__main {
+      margin-top: -10px;
+      transform: scale(0.75);
+    }
+
+    img:not(.fit__main) {
+      transform: scale(.75);
+    }
+  }
+
   .services {
     &__item {
       p {
@@ -581,6 +915,167 @@
     }
   }
 
+  .mts {
+    &__main {
+      max-width: 90%;
+    }
+
+    img:not(.mts__main) {
+      transform: scale(0.6);
+    }
+
+    &__ball1 {
+      left: 70px;
+      bottom: 0;
+      @keyframes ball2-1 {
+        to {
+          bottom: -20px;
+        }
+      }
+    }
+
+    &__ball2 {
+      right: 70px;
+      bottom: 85px;
+      @keyframes ball2-2 {
+        to {
+          bottom: 65px;
+        }
+      }
+    }
+
+    &__ball3 {
+      right: 120px;
+      top: 320px;
+      @keyframes ball2-3 {
+        to {
+          top: 300px;
+        }
+      }
+    }
+  }
+
+  .mir {
+
+    &__item1 {
+      top: 170px;
+      @keyframes bubl1 {
+        to {
+          top: 190px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 40px;
+      @keyframes bubl2 {
+        to {
+          top: 60px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 60px;
+      @keyframes bubl3 {
+        to {
+          top: 40px;
+        }
+      }
+    }
+  }
+
+  .hd {
+    &__main {
+      transform: scale(0.6);
+      margin-top: -50px;
+    }
+
+    img:not(.hd__main) {
+      transform: scale(0.6);
+    }
+
+    &__item1 {
+      top: 50px;
+      @keyframes item1 {
+        to {
+          top: 35px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 40px;
+      right: 50px;
+      @keyframes item2 {
+        to {
+          top: 60px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 190px;
+      right: 145px;
+      @keyframes item3 {
+        to {
+          top: 210px;
+        }
+      }
+    }
+  }
+
+  .fit {
+    &__main {
+      margin-top: -50px;
+      transform: scale(0.6);
+    }
+
+    img:not(.fit__main) {
+      transform: scale(.6);
+    }
+
+    &__ball1 {
+      top: 230px;
+      left: 30px;
+      @keyframes ball5-1 {
+        to {
+          top: 210px;
+        }
+      }
+    }
+
+    &__ball2 {
+      top: 240px;
+      left: 40px;
+      @keyframes ball5-2 {
+        to {
+          top: 260px;
+        }
+      }
+    }
+
+    &__ball3 {
+      top: 150px;
+      right: 30px;
+      @keyframes ball5-3 {
+        to {
+          top: 170px;
+        }
+      }
+    }
+
+    &__ball4 {
+      top: 240px;
+      right: 10px;
+      @keyframes ball5-4 {
+        to {
+          top: 220px;
+        }
+      }
+    }
+  }
+
   .services {
     background-position: center bottom !important;
 
@@ -687,6 +1182,7 @@
           line-height: 35px;
           text-align: center;
           letter-spacing: 0.005em;
+          padding: 0;
         }
 
         .link {
@@ -738,9 +1234,67 @@
 
 @media screen and (max-width: 767px) {
   .main {
+    height: 100vh;
+
+    .container {
+      height: 100%;
+    }
+
     .slider {
+      height: 100%;
+
       &__linearProgressbar {
         left: calc(100vw - 540px) / -2;
+      }
+
+      &__content {
+        .link {
+          position: absolute;
+          bottom: 80px;
+        }
+      }
+    }
+  }
+
+  .mts {
+    &__main {
+      max-width: 100%;
+    }
+
+    img:not(.mts__main) {
+      transform: scale(0.6);
+    }
+
+    &__ball1 {
+      left: 50px;
+      bottom: auto;
+      top: 350px;
+      @keyframes ball2-1 {
+        to {
+          top: 370px;
+        }
+      }
+    }
+
+    &__ball2 {
+      right: 50px;
+      bottom: auto;
+      top: 400px;
+      @keyframes ball2-2 {
+        to {
+          top: 420px;
+        }
+      }
+    }
+
+    &__ball3 {
+      right: 90px;
+      top: 310px;
+      bottom: auto;
+      @keyframes ball2-3 {
+        to {
+          top: 330px;
+        }
       }
     }
   }
@@ -815,6 +1369,186 @@
           bottom: 150px;
         }
       };
+    }
+  }
+
+  .mts {
+    &__main {
+      max-width: none;
+      width: 600px;
+      margin-left: 50%;
+      transform: translate(-50%);
+      margin-top: 50px;
+    }
+
+    img:not(.mts__main) {
+      transform: scale(0.6);
+    }
+
+    &__ball1 {
+      left: -60px;
+      top: 380px;
+      @keyframes ball2-1 {
+        to {
+          top: 400px;
+        }
+      }
+    }
+
+    &__ball2 {
+      right: 10px;
+      top: 450px;
+      @keyframes ball2-2 {
+        to {
+          top: 470px;
+        }
+      }
+    }
+
+    &__ball3 {
+      right: 30px;
+      top: 350px;
+      @keyframes ball2-3 {
+        to {
+          top: 370px;
+        }
+      }
+    }
+  }
+
+  .mir {
+    &__main {
+      width: 550px;
+      margin-left: 50%;
+      transform: translate(-50%);
+    }
+
+
+    img:not(.mir__main) {
+      transform: scale(0.5);
+    }
+
+    &__item1 {
+      top: 200px;
+      left: -220px;
+      @keyframes bubl1 {
+        to {
+          top: 220px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 20px;
+      left: -280px;
+      @keyframes bubl2 {
+        to {
+          top: 40px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 100px;
+      right: -300px;
+      @keyframes bubl3 {
+        to {
+          top: 80px;
+        }
+      }
+    }
+  }
+
+  .hd {
+    &__main {
+      transform: scale(0.8);
+      margin-top: 10px;
+    }
+
+    img:not(.hd__main) {
+      transform: scale(0.6);
+    }
+
+    &__item1 {
+      left: -80px;
+      top: 60px;
+      @keyframes item1 {
+        to {
+          top: 45px;
+        }
+      }
+    }
+
+    &__item2 {
+      top: 70px;
+      right: -80px;
+      @keyframes item2 {
+        to {
+          top: 90px;
+        }
+      }
+    }
+
+    &__item3 {
+      top: 230px;
+      right: 25px;
+      @keyframes item3 {
+        to {
+          top: 250px;
+        }
+      }
+    }
+  }
+
+  .fit {
+    &__main {
+      margin-top: 30px;
+      transform: scale(1);
+      width: 320px;
+    }
+
+    img:not(.fit__main) {
+      transform: scale(.7);
+    }
+
+    &__ball1 {
+      top: 170px;
+      left: -70px;
+      @keyframes ball5-1 {
+        to {
+          top: 150px;
+        }
+      }
+    }
+
+    &__ball2 {
+      top: 200px;
+      left: -90px;
+      @keyframes ball5-2 {
+        to {
+          top: 220px;
+        }
+      }
+    }
+
+    &__ball3 {
+      top: 120px;
+      right: -80px;
+      @keyframes ball5-3 {
+        to {
+          top: 140px;
+        }
+      }
+    }
+
+    &__ball4 {
+      top: 200px;
+      right: -60px;
+      @keyframes ball5-4 {
+        to {
+          top: 180px;
+        }
+      }
     }
   }
 }

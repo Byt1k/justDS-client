@@ -1,5 +1,6 @@
 import styles from '@/styles/footer.module.scss'
 import Link from "next/link";
+import {Link as ScrollTo} from "react-scroll/modules";
 
 const Footer = () => {
     return (
@@ -44,8 +45,9 @@ const Footer = () => {
                     <nav>
                         <Link href="/portfolio">Наши кейсы</Link>
                         <Link href="/services">Услуги</Link>
-                        <Link href="/contacts">Контакты</Link>
-                        <Link href="/blog">Блог</Link>
+                        <ScrollTo to="footer" smooth={true} duration={800} className={styles.header__btn}>
+                        Контакты</ScrollTo>
+                        <Link href="/posts">Блог</Link>
                     </nav>
                 </div>
             </div>

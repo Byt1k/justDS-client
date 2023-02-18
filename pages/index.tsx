@@ -42,24 +42,49 @@ const Home = () => {
 
     const slides = [
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54E97E 0%, #6A9BFB 70.99%)',
-            backgroundText: 'Дизайн и разработка'
+            background: 'linear-gradient(110.56deg, #54E97E 0%, #6A9BFB 70.99%)',
+            backgroundText: 'Дизайн и разработка',
+            type: 'LANDING',
+            title: 'Сайт к юбилею компании',
+            url: '',
+            linkText: 'Аптека «Ригла»',
+            menuColor: 'rgba(106, 155, 251, .6)'
         },
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54E9E0 0%, #C46AFB 70.99%)',
-            backgroundText: 'Технический аудит'
+            background: 'linear-gradient(110.56deg, #E53935 0%, #E35D5B 70.99%)',
+            backgroundText: 'Дизайн и разработка',
+            type: 'LANDING',
+            title: 'ДИЗАЙН И РАЗРАБОТКА',
+            url: '',
+            linkText: 'МТС',
+            menuColor: 'rgba(227, 93, 91, .6)'
         },
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54E97E 0%, #6A9BFB 70.99%)',
-            backgroundText: 'Дизайн и разработка'
+            background: 'linear-gradient(108.33deg, #03001E -0.65%, #7303C0 30.51%, #EC38BC 65.82%, #FDEFF9 99.05%)',
+            backgroundText: 'Дизайн и разработка',
+            type: 'WEBSITE',
+            title: 'ДИЗАЙН И РАЗРАБОТКА',
+            url: '',
+            linkText: 'Made in Russia',
+            menuColor: 'rgba(236, 56, 188, .5)'
         },
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54E9E0 0%, #C46AFB 70.99%)',
-            backgroundText: 'Технический аудит'
+            background: 'linear-gradient(107.91deg, #481FDA -6.27%, #973EC1 26.87%, #D45E80 61.45%, #DB9951 98.29%)',
+            backgroundText: 'Дизайн и разработка',
+            type: 'MOBILE',
+            title: 'ДИЗАЙН И РАЗРАБОТКА',
+            url: '',
+            linkText: 'Happy Delivery',
+            menuColor: 'rgba(219, 153, 81, .6)'
         },
         {
-            backgroundColor: 'linear-gradient(110.56deg, #54E29E0 0%, #C42AFB 70.99%)',
-            backgroundText: 'аудит'
+            background: 'linear-gradient(110.56deg, #134E5E 0%, #71B280 70.99%)',
+            backgroundText: 'Дизайн и разработка',
+            type: 'ИТ-КОНСАЛТИНГ',
+            title: 'Стратегия Цифровой трансформации',
+            url: '',
+            linkText: 'Проект',
+            menuColor: 'rgba(113, 172, 128, .6)'
         }
     ]
 
@@ -111,9 +136,9 @@ const Home = () => {
 
     return (
         <>
-            <main className={styles.main} style={{background: slides[activeSlideIndex].backgroundColor}}>
+            <main className={styles.main} style={{background: slides[activeSlideIndex].background}}>
                 <Header/>
-                <div className={styles.menu}>
+                <div className={styles.menu} style={{background: slides[activeSlideIndex].menuColor}}>
                     <Link href='/portfolio' className={styles.link}>
                         <p>Проекты</p>
                     </Link>
@@ -155,18 +180,43 @@ const Home = () => {
                             <div style={{width: `${valueProgressbar * 5}%`}}/>
                         </div>
                         <div className={styles.slider__content}>
-                            <p className={styles.type}>LANDING</p>
-                            <p className={styles.title}>Сайт к юбилею компании</p>
-                            <div className={styles.rigla}>
+                            <p className={styles.type}>{slides[activeSlideIndex].type}</p>
+                            <p className={styles.title}>{slides[activeSlideIndex].title}</p>
+                            {activeSlideIndex === 0 && <div className={styles.rigla}>
                                 <img src="/1.png" alt="medicine" className={styles.rigla__main}/>
                                 <img src="/pill1.png" alt="pill" className={styles.pill1}/>
                                 <img src="/pill2.png" alt="pill" className={styles.pill2}/>
                                 <img src="/pill3.png" alt="pill" className={styles.pill3}/>
                                 <img src="/pill4.png" alt="pill" className={styles.pill4}/>
                                 <img src="/pill5.png" alt="pill" className={styles.pill5}/>
-                            </div>
-                            <Link href='#' className={styles.link}>
-                                Аптека «Ригла»
+                            </div>}
+                            {activeSlideIndex === 1 && <div className={styles.mts}>
+                                <img src="/2.png" alt="mockup" className={styles.mts__main}/>
+                                <img src="/ball2-1.png" alt="ball" className={styles.mts__ball1}/>
+                                <img src="/ball2-2.png" alt="ball" className={styles.mts__ball2}/>
+                                <img src="/ball2-3.png" alt="ball" className={styles.mts__ball3}/>
+                            </div>}
+                            {activeSlideIndex === 2 && <div className={styles.mir}>
+                                <img src="/3.png" alt="mockup" className={styles.mir__main}/>
+                                <img src="/3-1.png" alt="item" className={styles.mir__item1}/>
+                                <img src="/3-2.png" alt="item" className={styles.mir__item2}/>
+                                <img src="/3-3.png" alt="item" className={styles.mir__item3}/>
+                            </div>}
+                            {activeSlideIndex === 3 && <div className={styles.hd}>
+                                <img src="/4.png" alt="mockup" className={styles.hd__main}/>
+                                <img src="/4-1.png" alt="item" className={styles.hd__item1}/>
+                                <img src="/4-2.png" alt="item" className={styles.hd__item2}/>
+                                <img src="/4-3.png" alt="item" className={styles.hd__item3}/>
+                            </div>}
+                            {activeSlideIndex === 4 && <div className={styles.fit}>
+                                <img src="/5.png" alt="mockup" className={styles.fit__main}/>
+                                <img src="/ball5-1.png" alt="ball" className={styles.fit__ball1}/>
+                                <img src="/ball5-2.png" alt="ball" className={styles.fit__ball2}/>
+                                <img src="/ball5-3.png" alt="ball" className={styles.fit__ball3}/>
+                                <img src="/ball5-4.png" alt="ball" className={styles.fit__ball4}/>
+                            </div>}
+                            <Link href={slides[activeSlideIndex].url} className={styles.link}>
+                                {slides[activeSlideIndex].linkText}
                                 <img src="/arrow-go.svg" alt="arrow"/>
                             </Link>
                         </div>
@@ -201,7 +251,7 @@ const Home = () => {
             </section>
             <Cases className={styles.portfolio}/>
             <Blog posts={posts} className={styles.blog} title="Блог"/>
-            <Footer />
+            <Footer/>
         </>
     )
 }
