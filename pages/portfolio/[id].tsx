@@ -11,7 +11,7 @@ import {ProjectType} from "@/types";
 import dateToString from "@/utils/dateToString";
 
 type ProjectProps = {
-    project: ProjectType
+    project?: ProjectType
 }
 
 const Project: NextPage<ProjectProps> = ({project}) => {
@@ -24,15 +24,15 @@ const Project: NextPage<ProjectProps> = ({project}) => {
                     <Breadcrumbs>
                         <Link href='/'>Главная</Link>
                         <Link href='/portfolio'>Портфолио</Link>
-                        <p>{project.attributes.title}</p>
+                        <p>{project?.attributes.title}</p>
                     </Breadcrumbs>
                     <div className={styles.project__info}>
-                        <p>Опубликовано: <strong>{dateToString(project.attributes.publishedAt)}</strong></p>
+                        <p>Опубликовано: <strong>{dateToString(project?.attributes.publishedAt)}</strong></p>
                         <Share />
                     </div>
-                    <p className={styles.project__title}>{project.attributes.title}</p>
-                    <img src={serverUrl + project.attributes.presentation.data.attributes.url}
-                         alt={project.attributes.title} className={styles.project__img}/>
+                    <p className={styles.project__title}>{project?.attributes.title}</p>
+                    <img src={serverUrl + project?.attributes.presentation.data.attributes.url}
+                         alt={project?.attributes.title} className={styles.project__img}/>
                 </div>
             </section>
             <Footer/>
