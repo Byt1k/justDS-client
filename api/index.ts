@@ -6,7 +6,7 @@ export type ApiReturnType = {
     projects: ReturnType<typeof projectsApi>,
 }
 
-export const serverUrl = 'http://127.0.0.1:1337';
+export const serverUrl = 'http://178.57.222.34:1337';
 
 export const Api = (): ApiReturnType => {
 
