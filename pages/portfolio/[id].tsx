@@ -6,8 +6,7 @@ import Link from "next/link";
 import Share from "@/components/Share";
 import {Api, serverUrl} from "@/api";
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {ParsedUrlQuery} from "querystring";
-import {ProjectType} from "@/types";
+import {IParams, ProjectType} from "@/types";
 import dateToString from "@/utils/dateToString";
 
 type ProjectProps = {
@@ -67,10 +66,6 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         console.log(e)
         return {props: { project: [] }}
     }
-}
-
-interface IParams extends ParsedUrlQuery {
-    id: string
 }
 
 export default Project;

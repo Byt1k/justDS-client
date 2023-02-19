@@ -2,8 +2,8 @@
   width: 100%;
   border: 1px solid #D9D9D9;
   border-radius: 40px;
-  height: 580px;
-  padding-bottom: 35px;
+  height: 590px;
+  padding-bottom: 25px;
 
 
   &__img {
@@ -41,11 +41,14 @@
     justify-content: space-between;
     padding: 0 25px;
     margin-top: 20px;
+    position: relative;
 
     .tags {
       color: #1D9AD3;
       display: flex;
-      gap: 21px;
+      flex-wrap: wrap;
+      column-gap: 21px;
+      padding-right: 50px;
     }
 
     .views {
@@ -53,6 +56,9 @@
       align-items: center;
       gap: 10px;
       color: rgba(26, 26, 26, 0.5);
+      position: absolute;
+      top: 0;
+      right: 25px;
     }
   }
 
@@ -77,14 +83,14 @@
 
 @media screen and (max-width: 1599px) {
   .post {
-    height: 500px;
+    height: 540px;
     &__img {
       height: 210px;
     }
 
     &__info {
       .tags {
-        gap: 10px;
+        column-gap: 10px;
         font-size: 14px;
       }
 
@@ -97,7 +103,7 @@
 
 @media screen and (max-width: 1200px){
   .post {
-    height: 540px;
+    height: 480px;
   }
 }
 

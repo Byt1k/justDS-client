@@ -1,8 +1,24 @@
 import styles from '@/styles/footer.module.scss'
 import Link from "next/link";
 import {Link as ScrollTo} from "react-scroll/modules";
+import {useEffect, useState} from "react";
+import {Api} from "@/api";
+import {ContactsType} from "@/types";
 
 const Footer = () => {
+    const [contacts, setContacts] = useState<ContactsType>({email: '', tel: ''})
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const contacts = await Api().interface.getContacts()
+                setContacts(contacts)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchData()
+    }, [])
+
     return (
         <footer className={styles.footer} id="footer">
             <div className={styles.action}>
@@ -10,8 +26,8 @@ const Footer = () => {
                     <div>
                         <h2><strong>Связаться</strong> с нами</h2>
                         <p>
-                            Используйте форму или напишите нам на почту
-                            <a href="mailto:just@ds.ru"> just@ds.ru</a>
+                            Используйте форму или напишите нам на почту &nbsp;
+                            <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
                         </p>
                     </div>
                     <form className={styles.form}>
@@ -32,11 +48,11 @@ const Footer = () => {
                     </Link>
                     <div className={styles.contacts__item}>
                         <p>E-mail</p>
-                        <a href="mailto:just@ds.ru">just@ds.ru</a>
+                        <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
                     </div>
                     <div className={styles.contacts__item}>
                         <p>Телефон</p>
-                        <a href="tel:+7 954 954 43-23">+7 954 954 43-23</a>
+                        <a href={`tel:${contacts.tel}`}>{contacts.tel}</a>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import styles from "@/styles/portfolio.module.scss"
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import {Api, serverUrl} from "@/api";
-import {GetStaticPaths, GetStaticProps, NextPage} from "next";
+import {GetStaticProps, NextPage} from "next";
 import {PaginationType, ProjectType} from "@/types";
 
 type PortfolioProps = {
@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps = async () => {
         console.log(e)
         return {props: {projects: [], meta: {}}}
     }
-
 }
 
 export default Portfolio;

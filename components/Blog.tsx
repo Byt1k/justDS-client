@@ -17,16 +17,20 @@ const Blog: FC<BlogProps> = ({posts, className, title}) => {
             <div className={styles.container}>
                 <div className={styles.blog__title}>
                     <h2>{title}</h2>
-                    <Link href='/posts'>
+                    <Link href='/posts' className={`${styles.link} ${styles.link_desktop}`}>
                         Все записи
                         <img src="/title-arrow.svg" alt="arrow"/>
                     </Link>
                 </div>
                 <div className={styles.blog__wrapper}>
-                    {posts.map(post => (
+                    {posts?.reverse().map(post => (
                         <Post key={post.id} post={post}/>
                     ))}
                 </div>
+                <Link href='/posts' className={`${styles.link} ${styles.link_mobile}`}>
+                    Все записи
+                    <img src="/title-arrow.svg" alt="arrow"/>
+                </Link>
             </div>
         </section>
     );

@@ -64,10 +64,6 @@
   .posts {
     &__grid {
       grid-template-columns: repeat(2, 1fr);
-
-      > a {
-        height: 450px;
-      }
     }
   }
 }
@@ -81,12 +77,6 @@
         padding: 12px 40px;
       }
     }
-
-    &__grid {
-      > a {
-        height: 540px;
-      }
-    }
   }
 }
 
@@ -94,10 +84,6 @@
   .posts {
     &__grid {
       grid-template-columns: 1fr;
-
-      > a {
-        height: auto;
-      }
     }
   }
 }

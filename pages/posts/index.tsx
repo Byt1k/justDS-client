@@ -3,17 +3,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import styles from "@/styles/posts.module.scss"
 import Post from "@/components/Post";
+import {GetStaticProps, NextPage} from "next";
+import {PaginationType, PostType, TagType} from "@/types";
+import {Api} from "@/api";
 
-const Posts = () => {
+type PostsProps = {
+    posts: PostType[],
+    meta: {
+        pagination: PaginationType
+    },
+    tags: TagType[]
+}
 
-    //todo: tags should be from api
-    const tags = [
-        {key: 'consult', value: '#it_консалтинг'},
-        {key: 'webDev', value: '#web_разработка'},
-        {key: 'mobileDev', value: '#мобильная_разработка'},
-        {key: 'design', value: '#web_дизайн'}
-    ]
-
+const Posts: NextPage<PostsProps> = ({posts, meta, tags}) => {
     const [filterValue, setFilterValue] = useState<string[]>([])
 
     const changeFilterValue = (tag: string) => {
@@ -29,50 +31,6 @@ const Posts = () => {
         }
     }
 
-    //todo: posts should be from api
-    const posts = [
-        {
-            id: 1,
-            img: '/post1.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult'],
-            views: 20
-        },
-        {
-            id: 2,
-            img: '/post2.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult', 'design'],
-            views: 20
-        },
-        {
-            id: 3,
-            img: '/post3.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['design'],
-            views: 20
-        },
-        {
-            id: 4,
-            img: '/post3.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult', 'design'],
-            views: 20
-        },
-        {
-            id: 5,
-            img: '/post1.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['design'],
-            views: 20
-        }
-    ]
-
     return (
         <>
             <section className={styles.posts}>
@@ -81,16 +39,16 @@ const Posts = () => {
                     <div className={styles.posts__title}>
                         <h2>Все статьи</h2>
                         <div className={styles.posts__filter}>
-                            {tags.map(tag => (
-                                <button key={tag.key}
-                                        className={filterValue.some(item => item === tag.key) ? styles.active : ''}
-                                        onClick={() => changeFilterValue(tag.key)}>{tag.value}</button>
+                            {tags?.map(tag => (
+                                <button key={tag.attributes.key}
+                                        className={filterValue.some(item => item === tag.attributes.key) ? styles.active : ''}
+                                        onClick={() => changeFilterValue(tag.attributes.key)}>{tag.attributes.value}</button>
                             ))}
                         </div>
                     </div>
                     <div className={styles.posts__grid}>
-                        {posts.map(post => (
-                            <Post post={post} />
+                        {posts?.map(post => (
+                            <Post key={post.id} post={post} />
                         ))}
                     </div>
                 </div>
@@ -99,5 +57,16 @@ const Posts = () => {
         </>
     );
 };
+
+export const getStaticProps: GetStaticProps = async () => {
+    try {
+        const {data, meta} = await Api().posts.getPosts()
+        const tags = await Api().posts.getTags()
+        return {props: {posts: data, meta, tags}}
+    } catch (e) {
+        console.log(e)
+        return {props: {posts: []}}
+    }
+}
 
 export default Posts;

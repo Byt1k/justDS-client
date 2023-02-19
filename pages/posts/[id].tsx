@@ -7,49 +7,18 @@ import Link from "next/link";
 import Share from "@/components/Share";
 import Blog from "@/components/Blog";
 import Cases from "@/components/Cases";
+import {GetStaticPaths, GetStaticProps, NextPage} from "next";
+import {IParams, PostType} from "@/types";
+import {Api, serverUrl} from "@/api";
+import dateToString from "@/utils/dateToString";
+import ReactMarkdown from 'react-markdown';
 
-const Single = () => {
-    //todo: post should be from api
-    const post = {
-        id: 1,
-        img: '/post1.png',
-        title: 'Создаем визуал для проектов любого объема и сложности',
-        text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-        tags: ['consult'],
-        views: 20,
-        author: 'Марина Колашникова',
-        readingTime: '10 мин',
-        date: '22.06.2022'
-    }
+type SingleProps = {
+    posts: PostType[],
+    currentPost: PostType
+}
 
-    //todo: posts should be from api
-    const posts = [
-        {
-            id: 1,
-            img: '/post1.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult'],
-            views: 10
-        },
-        {
-            id: 2,
-            img: '/post2.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult', 'design'],
-            views: 10
-        },
-        {
-            id: 3,
-            img: '/post3.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['design'],
-            views: 10
-        }
-    ]
-
+const Single:NextPage<SingleProps> = ({posts, currentPost}) => {
     return (
         <>
             <section className={styles.single}>
@@ -58,24 +27,26 @@ const Single = () => {
                     <Breadcrumbs>
                         <Link href='/'>Главная</Link>
                         <Link href='/posts'>Блог</Link>
-                        <p>{post.title}</p>
+                        <p>{currentPost.attributes.title}</p>
                     </Breadcrumbs>
                     <div className={styles.single__info}>
                         <div className={styles.top}>
-                            <p>Автор: {post.author}</p>
-                            <p>Время чтения <strong>{post.readingTime}</strong>.</p>
+                            <p>Автор: {currentPost.attributes.author.data.attributes.fullName}</p>
+                            <p>Время чтения <strong>{currentPost.attributes.readingTime}</strong>.</p>
                         </div>
-                        <p className={styles.single__title}>{post.title}</p>
+                        <p className={styles.single__title}>{currentPost.attributes.title}</p>
                         <div className={styles.bottom}>
-                            <p className={styles.single__date}>Опубликовано: <strong>{post.date}</strong></p>
-                            <p className={styles.single__views}>Просмотры: <strong>{post.views}</strong></p>
+                            <p className={styles.single__date}>
+                                Опубликовано: <strong>{dateToString(currentPost.attributes.publishedAt)}</strong></p>
+                            <p className={styles.single__views}>Просмотры: <strong>{20}</strong></p>
                             <Share className={styles.single__share}/>
                         </div>
                     </div>
-
-                    {/* todo: strapi */}
-                    <strong style={{color: 'red'}}>Разметка статьи</strong>
-
+                    <div className={styles.single__source}>
+                        <img src={serverUrl + currentPost.attributes.cover.data.attributes.url} alt="Cover"/>
+                        {currentPost.attributes.source && <p>Источник: {currentPost.attributes.source}</p>}
+                    </div>
+                    <ReactMarkdown children={currentPost.attributes.content} className={styles.single__content}/>
                     <Blog posts={posts} title="Другие статьи" className={styles.blog}/>
                     <Cases className={styles.portfolio}/>
                 </div>
@@ -84,5 +55,35 @@ const Single = () => {
         </>
     );
 };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    try {
+        const {data: posts} = await Api().posts.getPosts()
+
+        const paths = posts?.map(post => ({
+            params: {id: post.id.toString()}
+        }))
+
+        return {paths, fallback: false}
+    } catch (e) {
+        console.log(e)
+        return {paths: [], fallback: false}
+    }
+}
+
+export const getStaticProps: GetStaticProps = async ({params}) => {
+    try {
+        const {id} = params as IParams
+        const {data: currentPost} = await Api().posts.getPost(id)
+        const {data: posts} = await Api().posts.getPopularPosts()
+
+        return {
+            props: {currentPost, posts}
+        }
+    } catch (e) {
+        console.log(e)
+        return {props: { currentPost: {}, posts: [] }}
+    }
+}
 
 export default Single

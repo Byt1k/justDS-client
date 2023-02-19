@@ -5,11 +5,18 @@ import {buildStyles, CircularProgressbar} from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import {useEffect, useState} from "react"
 import Footer from '@/components/Footer'
-import {Link as ScrollTo, animateScroll as scroll} from "react-scroll";
+import {Link as ScrollTo} from "react-scroll";
 import Cases from "@/components/Cases";
 import Blog from "@/components/Blog";
+import {GetStaticProps, NextPage} from "next";
+import {PostType} from "@/types";
+import {Api} from "@/api";
 
-const Home = () => {
+type HomeProps = {
+    posts: PostType[]
+}
+
+const Home:NextPage<HomeProps> = ({posts}) => {
     const [rotationProgressbar, setRotationProgressbar] = useState(-0.5)
     const [valueProgressbar, setValueProgressbar] = useState(0)
     const [transitionProgressbar, setTransitionProgressbar] = useState(0.5)
@@ -106,34 +113,6 @@ const Home = () => {
         }
     }
 
-    //todo: posts should be from api
-    const posts = [
-        {
-            id: 1,
-            img: '/post1.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult'],
-            views: 10
-        },
-        {
-            id: 2,
-            img: '/post2.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['consult'],
-            views: 10
-        },
-        {
-            id: 3,
-            img: '/post3.png',
-            title: 'Создаем визуал для проектов любого объема и сложности',
-            text: 'История о человеке, который смертельно боялся пуговиц. Не в силах жить с этим недугом, решает покончить жизнь самоубийством. Но это ему не удаётся.',
-            tags: ['design'],
-            views: 10
-        }
-    ]
-
     return (
         <>
             <main className={styles.main} style={{background: slides[activeSlideIndex].background}}>
@@ -229,21 +208,21 @@ const Home = () => {
                     <div className={styles.services__item}>
                         <p>web-разработка & дизайн</p>
                         <div>
-                            <a href="#">Написать нам</a>
+                            <ScrollTo to="footer" smooth={true} duration={800}>Написать нам</ScrollTo>
                             <Link href="/portfolio">Портфолио</Link>
                         </div>
                     </div>
                     <div className={styles.services__item}>
                         <p>мобильная разработка</p>
                         <div>
-                            <a href="#">Написать нам</a>
+                            <ScrollTo to="footer" smooth={true} duration={800}>Написать нам</ScrollTo>
                             <Link href="/portfolio">Портфолио</Link>
                         </div>
                     </div>
                     <div className={styles.services__item}>
                         <p>ит-консалтинг</p>
                         <div>
-                            <a href="#">Написать нам</a>
+                            <ScrollTo to="footer" smooth={true} duration={800}>Написать нам</ScrollTo>
                             <Link href="/portfolio">Портфолио</Link>
                         </div>
                     </div>
@@ -254,6 +233,16 @@ const Home = () => {
             <Footer/>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    try {
+        const {data: posts} = await Api().posts.getPopularPosts()
+        return {props: {posts}}
+    } catch (e) {
+        console.log(e)
+        return {props: {posts: []}}
+    }
 }
 
 export default Home

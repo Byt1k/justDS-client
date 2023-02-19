@@ -1,12 +1,16 @@
-import { GetServerSidePropsContext, NextPageContext } from "next";
-import { projectsApi } from "./projects";
 import axios from "axios";
+import {projectsApi} from "./projects";
+import {interfaceApi} from "@/api/interface";
+import {postsApi} from "@/api/posts";
 
 export type ApiReturnType = {
     projects: ReturnType<typeof projectsApi>,
+    interface: ReturnType<typeof interfaceApi>,
+    posts: ReturnType<typeof postsApi>
 }
 
 export const serverUrl = 'http://178.57.222.34:1337';
+// export const serverUrl = 'http://127.0.0.1:1337';
 
 export const Api = (): ApiReturnType => {
 
@@ -16,5 +20,7 @@ export const Api = (): ApiReturnType => {
 
     return {
         projects: projectsApi(instance),
+        interface: interfaceApi(instance),
+        posts: postsApi(instance)
     }
 }
