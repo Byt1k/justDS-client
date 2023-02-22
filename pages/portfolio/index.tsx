@@ -5,6 +5,7 @@ import Link from "next/link";
 import {Api, serverUrl} from "@/api";
 import {GetStaticProps, NextPage} from "next";
 import {PaginationType, ProjectType} from "@/types";
+import ProjectCard from "@/components/ProjectCard";
 
 type PortfolioProps = {
     projects: ProjectType[],
@@ -23,11 +24,7 @@ const Portfolio: NextPage<PortfolioProps> = ({projects, meta}) => {
                     <h2>Наши <strong>кейсы</strong></h2>
                     <div className={styles.portfolio__grid}>
                         {projects?.map(project => (
-                            <Link key={project.id} href={`/portfolio/${project.id}`} className={styles.portfolio__item}
-                                  style={{backgroundImage: `url(${serverUrl + project.attributes.preview.data.attributes.url})`}}>
-                                <p>{project.attributes.type}</p>
-                                <h3>{project.attributes.title}</h3>
-                            </Link>
+                            <ProjectCard project={project} className={styles.portfolio__item} />
                         ))}
                     </div>
                 </div>

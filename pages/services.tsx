@@ -2,8 +2,26 @@ import Header from "@/components/Header"
 import styles from '@/styles/services.module.scss'
 import Cases from "@/components/Cases";
 import Footer from "@/components/Footer";
+import {GetStaticProps, NextPage} from "next";
+import {Api} from "@/api";
+import {Service, Stage} from "@/types";
 
-const Services = () => {
+export const getStaticProps: GetStaticProps = async () => {
+    try {
+        const {data: services} = await Api().interface.getServices()
+        const {data: stages} = await Api().interface.getStages()
+        return {
+            props: {services, stages}
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            props: {services: [], stages: []}
+        }
+    }
+}
+
+const Services: NextPage<{services: Service[], stages: Stage[]}> = ({services, stages}) => {
     return (
         <>
             <main className={styles.servicesMain}>
@@ -66,36 +84,16 @@ const Services = () => {
                             <h2>Услуги</h2>
                         </div>
                     </div>
-                    <div className={styles.wrapper}>
-                        <div className={styles.left}>
-                            <p className={styles.title}>Разработка сайтов <br/>и сервисов</p>
+                    {services?.map(service => (
+                        <div className={styles.wrapper}>
+                            <div className={styles.left}>
+                                <p className={styles.title}>{service.attributes.title}</p>
+                            </div>
+                            <div className={styles.right}>
+                                <p>{service.attributes.description}</p>
+                            </div>
                         </div>
-                        <div className={styles.right}>
-                            <p>Используя современные технологии и фреймворки, мы реализуем проекты любой сложности и
-                                масштаба: посадочные страницы, корпоративные сайты, интернет-магазины, высоконагруженные
-                                масштабируемые web-сервисы и порталы.</p>
-                        </div>
-                    </div>
-                    <div className={styles.wrapper}>
-                        <div className={styles.left}>
-                            <p className={styles.title}>Адаптивная<br/> верстка</p>
-                        </div>
-                        <div className={styles.right}>
-                            <p>Используя современные технологии и фреймворки, мы реализуем проекты любой сложности и
-                                масштаба: посадочные страницы, корпоративные сайты, интернет-магазины, высоконагруженные
-                                масштабируемые web-сервисы и порталы.</p>
-                        </div>
-                    </div>
-                    <div className={styles.wrapper}>
-                        <div className={styles.left}>
-                            <p className={styles.title}>Технический<br/> аудит</p>
-                        </div>
-                        <div className={styles.right}>
-                            <p>Используя современные технологии и фреймворки, мы реализуем проекты любой сложности и
-                                масштаба: посадочные страницы, корпоративные сайты, интернет-магазины, высоконагруженные
-                                масштабируемые web-сервисы и порталы.</p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
             <section className={styles.inclusivePrice}>
@@ -106,53 +104,21 @@ const Services = () => {
                         </div>
                         <div className={styles.right}>
                             <p className={styles.title}>Каждый этап разработки является самостоятельным</p>
-                            <p className={styles.text}>Результат каждого из этапов - шаг в сторону реализованного продукта, который можно будет
+                            <p className={styles.text}>Результат каждого из этапов - шаг в сторону реализованного
+                                продукта, который можно будет
                                 использовать без ограничений</p>
                         </div>
                     </div>
                     <div className={styles.inclusivePrice__wrapper}>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>UX-аналитика</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
+                        {stages?.map(stage => (
+                            <div className={styles.inclusivePrice__item}>
+                                <img src="/check.svg" alt="check"/>
+                                <div>
+                                    <p>{stage.attributes.title}</p>
+                                    <span>{stage.attributes.description}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>Дизайн</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
-                            </div>
-                        </div>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>Верстка</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
-                            </div>
-                        </div>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>Front-End</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
-                            </div>
-                        </div>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>Back-End</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
-                            </div>
-                        </div>
-                        <div className={styles.inclusivePrice__item}>
-                            <img src="/check.svg" alt="check"/>
-                            <div>
-                                <p>Тестирование</p>
-                                <span>Стильный, современный и продуманный дизайн с правильными акцентами</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -195,7 +161,7 @@ const Services = () => {
                     </div>
                 </div>
             </section>
-            <Footer />
+            <Footer/>
         </>
     );
 };

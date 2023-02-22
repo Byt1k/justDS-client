@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {PaginationType, ProjectType} from "@/types";
+import {CommonBlock, PaginationType, ProjectType} from "@/types";
 
 export const projectsApi = (instance: AxiosInstance) =>  ({
     async getAllProjects() {
@@ -7,7 +7,15 @@ export const projectsApi = (instance: AxiosInstance) =>  ({
         return data
     },
     async getProject(id: string) {
-        const {data} = await instance.get(`/api/projects/${id}?populate=*`)
+        const {data} = await instance.get<{data: ProjectType}>(`/api/projects/${id}?populate=*`)
+        return data
+    },
+    async getPopularProjects() {
+        const {data} = await instance.get<{data: ProjectType[], meta: PaginationType}>(`/api/projects?filters[popular][$eq]=true&populate=*`)
+        return data
+    },
+    async getCommonBlocks() {
+        const {data} = await instance.get<{data: CommonBlock[]}>('/api/common-blocks')
         return data
     }
 })

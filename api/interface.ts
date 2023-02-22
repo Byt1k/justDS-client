@@ -3,8 +3,15 @@ import {ContactsType} from "@/types";
 
 export const interfaceApi = (instance: AxiosInstance) => ({
     async getContacts() {
-        const contacts = await instance.get<{ data: { attributes: ContactsType } }>('/api/contact')
+        return await instance.get<{ data: { attributes: ContactsType } }>('/api/contact')
             .then(res => res.data.data.attributes)
-        return contacts
+    },
+    async getServices() {
+        const {data} = await instance.get('/api/services')
+        return data
+    },
+    async getStages() {
+        const {data} = await instance.get('/api/stages')
+        return data
     }
 })

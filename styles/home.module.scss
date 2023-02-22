@@ -1,11 +1,17 @@
 @import "common.module";
 
+.wrapper {
+  background-position: center bottom !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  transition: all .3s ease;
+}
+
 .main {
   height: 100vh;
   position: relative;
   transition: all .3s ease;
   overflow: hidden;
-  transition: all .3s ease;
 
   .menu {
     position: fixed;
@@ -488,6 +494,7 @@
 
   &__item {
     p {
+      width: 1300px;
       font-weight: 600;
       font-size: 138px;
       line-height: 130px;
@@ -807,6 +814,7 @@
   .services {
     &__item {
       p {
+        width: 100%;
         font-size: 113px;
         line-height: 120px;
       }

@@ -53,6 +53,15 @@ export type ProjectType = {
     }
 }
 
+export type CommonBlock = {
+    id: number,
+    attributes: {
+        title: string,
+        description: string,
+        link: string,
+    }
+}
+
 export type UserType = {
     id: number,
     attributes: {
@@ -71,6 +80,22 @@ export type PaginationType = {
 export type ContactsType = {
     email: string,
     tel: string
+}
+
+export type Service = {
+    id: number,
+    attributes: {
+        title: string,
+        description: string
+    }
+}
+
+export type Stage = {
+    id: number,
+    attributes: {
+        title: string,
+        description: string
+    }
 }
 
 export interface IParams extends ParsedUrlQuery {
