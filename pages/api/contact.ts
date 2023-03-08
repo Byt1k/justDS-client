@@ -11,8 +11,8 @@ const handler: express.RequestHandler<Record<string, any>, any, ContactForm, any
                 subject: "Давайте начнем проект вместе!",
                 html: `
                     <h3>Описание проекта</h3>
-                    <p>${data.project}</p>
-                    <p><b>Номер телефона</b> ${data.tel}</p>
+                    <p>${data.values.project}</p>
+                    <p><b>Номер телефона</b> ${data.values.tel}</p>
                 `
             })
             return res.status(200).json({success: true})
