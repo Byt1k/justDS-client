@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {ContactsType, PaginationType, PostType, TagType} from "@/types";
+import {PaginationType, PostType, TagType} from "@/types";
 
 export const postsApi = (instance: AxiosInstance) => ({
     async getPosts() {

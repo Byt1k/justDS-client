@@ -39,7 +39,11 @@ const Single:NextPage<SingleProps> = ({posts, currentPost}) => {
                             <p className={styles.single__date}>
                                 Опубликовано: <strong>{dateToString(currentPost.attributes.publishedAt)}</strong></p>
                             <p className={styles.single__views}>Просмотры: <strong>{20}</strong></p>
-                            <Share className={styles.single__share}/>
+                            <Share className={styles.single__share} content={{
+                                title: currentPost.attributes.title,
+                                description: currentPost.attributes.previewText,
+                                image: serverUrl + currentPost.attributes.cover.data.attributes.url
+                            }}/>
                         </div>
                     </div>
                     <div className={styles.single__source}>

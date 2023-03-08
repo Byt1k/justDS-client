@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import styles from "@/styles/posts.module.scss"
@@ -16,6 +16,7 @@ type PostsProps = {
 }
 
 const Posts: NextPage<PostsProps> = ({posts, meta, tags}) => {
+    const [visiblePosts, setVisiblePosts] = useState(posts)
     const [filterValue, setFilterValue] = useState<string[]>([])
 
     const changeFilterValue = (tag: string) => {
@@ -30,6 +31,16 @@ const Posts: NextPage<PostsProps> = ({posts, meta, tags}) => {
             ])
         }
     }
+
+    useEffect(() => {
+        if (filterValue.length) {
+            setVisiblePosts(
+                posts.filter(post => post.attributes.tags.data.some(tag => filterValue.indexOf(tag.attributes.key) !== -1))
+            )
+        } else {
+            setVisiblePosts(posts)
+        }
+    }, [filterValue])
 
     return (
         <>
@@ -47,8 +58,8 @@ const Posts: NextPage<PostsProps> = ({posts, meta, tags}) => {
                         </div>
                     </div>
                     <div className={styles.posts__grid}>
-                        {posts?.map(post => (
-                            <Post key={post.id} post={post} />
+                        {visiblePosts?.map(post => (
+                            <Post key={post.id} post={post}/>
                         ))}
                     </div>
                 </div>
@@ -65,7 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
         return {props: {posts: data, meta, tags}}
     } catch (e) {
         console.log(e)
-        return {props: {posts: []}}
+        return {props: {posts: [], meta: {}, tags: []}}
     }
 }
 

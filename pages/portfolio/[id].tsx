@@ -27,7 +27,10 @@ const Project: NextPage<ProjectProps> = ({project}) => {
                     </Breadcrumbs>
                     <div className={styles.project__info}>
                         <p>Опубликовано: <strong>{dateToString(project.attributes.publishedAt)}</strong></p>
-                        <Share/>
+                        <Share content={{
+                            title: project.attributes.title,
+                            image: project.attributes.preview.data.attributes.url
+                        }}/>
                     </div>
                     <p className={styles.project__title}>{project.attributes.title}</p>
                     <img src={serverUrl + project.attributes.presentation.data.attributes.url}

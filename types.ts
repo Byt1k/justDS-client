@@ -1,6 +1,5 @@
 import {ParsedUrlQuery} from "querystring";
 import {ReactMarkdownNames} from "react-markdown/lib/ast-to-react";
-import {Use} from "trough";
 
 type ImageUrl = {
     data: {

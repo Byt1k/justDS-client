@@ -116,7 +116,7 @@ const Home:NextPage<HomeProps> = ({posts}) => {
     return (
         <>
             <main className={styles.wrapper} style={{background: `#f5f5f5 url(${slides[activeSlideIndex].background})`}}>
-                <div className={styles.main}>
+                <section className={styles.main}>
                     <Header/>
                     <div className={styles.menu} style={{background: slides[activeSlideIndex].menuColor}}>
                         <Link href='/portfolio' className={styles.link}>
@@ -202,13 +202,8 @@ const Home:NextPage<HomeProps> = ({posts}) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            {/*    </div>*/}
-            {/*</main>*/}
-            {/*<section id="main-services" className={styles.services}*/}
-            {/*         style={{background: '#f5f5f5 url(/services0.png) no-repeat center top / cover'}}>*/}
-            {/*    <div className={styles.container}>*/}
-                <div className={styles.services}>
+                </section>
+                <section className={styles.services} id="main-services">
                     <div className={styles.container}>
                         <div className={styles.services__item}>
                             <p>web-разработка & дизайн</p>
@@ -232,7 +227,7 @@ const Home:NextPage<HomeProps> = ({posts}) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </main>
             <Cases className={styles.portfolio}/>
             <Blog posts={posts} className={styles.blog} title="Блог"/>

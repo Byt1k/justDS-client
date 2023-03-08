@@ -52,7 +52,9 @@ const Header = () => {
                         <Link href='/services' className={styles.menu__additionalItem}>Разработка сайтов</Link>
                         <Link href='/services' className={styles.menu__additionalItem}>Управление продуктом</Link>
                         <Link href='/services' className={styles.menu__additionalItem}>Аналитика</Link>
-                        <button className={styles.menu__btn}>Оставить заявку</button>
+                        <ScrollTo to="footer" smooth={true} duration={800} className={styles.menu__btn}
+                                  onClick={() => setMenuIsActive(false)}>
+                            Оставить заявку</ScrollTo>
                     </nav>
                 </div>
             </header>

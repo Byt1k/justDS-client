@@ -1,29 +1,43 @@
-import React, {FC} from 'react'
+import React, {FC, useEffect} from 'react'
 
-const Share: FC<{ className?: string }> = ({className}) => {
+type ShareProps = {
+    className?: string,
+    content: {
+        title: string,
+        description?: string
+        image: string
+    }
+}
+
+const Share: FC<ShareProps> = ({className, content}) => {
+    useEffect(() => {
+        //@ts-ignore
+        window.Ya.share2('ya', {
+            theme: {
+                services: 'telegram,vkontakte,whatsapp,viber',
+                shape: "round",
+            },
+            content: {
+                ...content,
+                url: window.location.href
+            }
+        });
+    })
     return (
         <>
             <div className={`share ${className}`}>
                 <p>Поделиться: </p>
-                <div className="share__icons">
-                    <img src="/telegram.svg" alt="telegram"/>
-                    <img src="/vk.svg" alt="vk"/>
-                    <img src="/whatsapp.svg" alt="whatsapp"/>
-                    <img src="/viber.svg" alt="viber"/>
-                </div>
+                <div id="ya" />
             </div>
             <style jsx>{`
               .share {
                 display: flex;
                 align-items: center;
-                column-gap: 40px;
+                column-gap: 15px;
               }
-              
-              .share__icons {
-                  display: flex;
-                  align-items: center;
-                  column-gap: 20px;
-                }
+              .share > p {
+                font-size: 18px;
+              }
             `}</style>
         </>
     );
