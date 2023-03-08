@@ -100,3 +100,11 @@ export type Stage = {
 export interface IParams extends ParsedUrlQuery {
     id: string
 }
+
+export type ContactForm = {
+    values: {
+        project: string,
+        tel: string
+    },
+    isSubmitting: boolean
+}
